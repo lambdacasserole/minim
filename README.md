@@ -62,5 +62,28 @@ These *must* be changed before you go into production, so you need to do the fol
 
 To see an example usage of Minim, [check out my demo repository](https://github.com/lambdacasserole/minim-demo).
 
+## Usage
+Load your Minim configuration file like this:
+
+```php
+$auth = new Authenticator(new Configuration('my-config-file.yml'));
+```
+
+From here you can log the user in:
+
+```php
+$auth->authenticate('email', 'password'); // Authenticate user, true on success false on failure.
+```
+
+Or redirect away from a page based on whether they're logged in or not:
+
+```php
+// Check if user is authenticated.
+if (!$auth->isAuthenticated()) {
+    header('Location: /forbidden.php'); // Not logged in, go to jail.
+    die();
+}
+```
+
 ## Limitations
 I'm not a security researcher, don't rely on Minim to be secure out of the box and always perform your own penetration testing.
