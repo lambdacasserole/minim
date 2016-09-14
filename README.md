@@ -21,5 +21,46 @@ Or alternatively, if you're using the PHAR (make sure the `php.exe` executable i
 php composer.phar require lambdacasserole/minim
 ```
 
+## Configuration
+Minim will require you to create a configuration file that looks something like this:
+
+```yaml
+# Don't commit this file to source control, it contains your secret settings.
+
+admin_email: me@example.com # The e-mail address of the user, used as a username.
+admin_password_hash: 8b2d49d3e1e9a339b030e08e89ed6cb77c50081e8f9e1c41511216b4d1787aef # The user's password hash.
+secret_key: 7WCPTI3of3cp # The secret key the application uses for symmetric encryption.
+salt: cgJ28CsaeV1T # The salt used to salt passwords before hashing.
+token_length: 32 # The length, in bytes, of any generated authentication tokens.
+token_ttl: 1200 # The time to live for authentication tokens, in seconds.
+cookie_name: minim_auth # The name of the authentication cookie.
+session_file_name: /var/www/minim/token.dat # The name of the session file on-disk.
+cookie_ssl_only: false # Whether or not cookies are enables for HTTPS only. If enabled, non-HTTPS requests will fail.
+cookie_http_only: true # Whether to restrict cookies to HTTP only and disallow access by client-side script.
+```
+
+The above file specifies some default credentials:
+
+```
+Email: me@example.com
+Password: demo
+```
+
+These *must* be changed before you go into production, so you need to do the following:
+
+* Copy the demo configuration file above into your project. Make sure it is ignored by any version control systems.
+* Open it up in your favorite text editor.
+* Change the `admin_email` field to your email address
+* Change the `admin_password_hash` field to the SHA-256 hash of a password of your choice. Never use online services to create your hashes, but hashes created using [this service](http://www.xorbin.com/tools/sha256-hash-calculator) will work. Don't forget to append your `salt`.
+* Change the `secret_key` field to a randomly-generated string at least 12 characters long.
+* Change the `salt` field to a randomly-generated string at least 12 characters long.
+* The default value of 32 for the `token_length` field should be okay for most applications.
+* The default value for the `token_ttl` field of 1200 seconds (20 minutes) should be okay for most applications.
+* Change the `session_file_name` field to the absolute path of a writable file on your server that Minim can read and write, but that your server _will not serve_.
+* Change `cookie_ssl_only` field to `true` if you're operating over HTTPS. If you're not, take a long hard look at your application and ask yourself why you're considering asking for user credentials over an insecure connection when amazing, free tools like [Let's Encrypt](https://letsencrypt.org/) exist.
+* Leave `cookie_http_only` as `true` to make the authentication cookie readable only over HTTP and not by client-side script.
+
+To see an example usage of Minim, [check out my demo repository](https://github.com/lambdacasserole/minim-demo).
+
 ## Limitations
 I'm not a security researcher, don't rely on Minim to be secure out of the box and always perform your own penetration testing.
