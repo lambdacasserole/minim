@@ -114,7 +114,7 @@ class Authenticator
 
         // Check credentials.
         if ($this->config->getAdminEmail() != $email
-            || Encryption::sha256($password, $this->config->getSalt()) != $this->config->getAdminPasswordHash())
+            || !Encryption::verify($password, $this->config->getAdminPasswordHash()))
         {
             return false; // Authentication failure.
         }

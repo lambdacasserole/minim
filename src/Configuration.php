@@ -56,16 +56,6 @@ class Configuration
     }
 
     /**
-     * Gets the salt to use during password hashing.
-     *
-     * @return string
-     */
-    public function getSalt()
-    {
-        return $this->config['salt'];
-    }
-
-    /**
      * Gets the length configured for login tokens.
      *
      * @return int

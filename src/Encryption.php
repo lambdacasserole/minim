@@ -12,15 +12,26 @@ namespace Minim;
 class Encryption
 {
     /**
-     * Hashes a password using SHA-256.
+     * Hashes a password.
      *
      * @param string $password  the password to hash
-     * @param string $salt      the salt for the password
      * @return string
      */
-    public static function sha256($password, $salt)
+    public static function hash($password)
     {
-        return hash('sha256', $password . $salt);
+        return password_hash($password, PASSWORD_DEFAULT);
+    }
+
+    /**
+     * Verifies that a password matches a hash.
+     *
+     * @param $password the password to verify
+     * @param $hash     the hash to check against
+     * @return bool
+     */
+    public static function verify($password, $hash)
+    {
+        return password_verify($password, $hash);
     }
 
     /**
