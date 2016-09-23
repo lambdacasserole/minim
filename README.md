@@ -50,7 +50,7 @@ These *must* be changed before you go into production, so you need to do the fol
 * Copy the demo configuration file above into your project. Make sure it is ignored by any version control systems.
 * Open it up in your favorite text editor.
 * Change the `admin_email` field to your email address
-* Change the `admin_password_hash` field to the SHA-256 hash of a password of your choice. Never use online services to create your hashes, but hashes created using [this service](http://www.xorbin.com/tools/sha256-hash-calculator) will work. Don't forget to append your `salt`.
+* Change the `admin_password_hash` field to the bcrypt hash of a password of your choice. Generate the hash using the bundled `minim-genhash` utility by invoking `vendor/bin/minim-genhash <password>` from the project root.
 * Change the `secret_key` field to a randomly-generated string at least 12 characters long.
 * Change the `salt` field to a randomly-generated string at least 12 characters long.
 * The default value of 32 for the `token_length` field should be okay for most applications.
