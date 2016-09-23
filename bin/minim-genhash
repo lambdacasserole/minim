@@ -1,0 +1,8 @@
+<?php
+
+require __DIR__ . '/../src/Encryption.php';
+
+use Minim\Encryption;
+
+// Output hashed password.
+echo 'Your password hash is: ' . Encryption::hash($argv[1]);

@@ -28,9 +28,8 @@ Minim will require you to create a configuration file that looks something like 
 # Don't commit this file to source control, it contains your secret settings.
 
 admin_email: me@example.com # The e-mail address of the user, used as a username.
-admin_password_hash: 8b2d49d3e1e9a339b030e08e89ed6cb77c50081e8f9e1c41511216b4d1787aef # The user's password hash.
-secret_key: 7WCPTI3of3cp # The secret key the application uses for symmetric encryption.
-salt: cgJ28CsaeV1T # The salt used to salt passwords before hashing.
+admin_password_hash: $2y$10$x8.kXrWv4lXFpObosuwQ0uoiQAUeFAlEL.oi0tN5pnM.72hoK9e8K # The user's password hash.
+secret_key: 7WCPTI3of3cp # The secret key the application uses for symmetric encryption
 token_length: 32 # The length, in bytes, of any generated authentication tokens.
 token_ttl: 1200 # The time to live for authentication tokens, in seconds.
 cookie_name: minim_auth # The name of the authentication cookie.
@@ -51,7 +50,7 @@ These *must* be changed before you go into production, so you need to do the fol
 * Copy the demo configuration file above into your project. Make sure it is ignored by any version control systems.
 * Open it up in your favorite text editor.
 * Change the `admin_email` field to your email address
-* Change the `admin_password_hash` field to the SHA-256 hash of a password of your choice. Never use online services to create your hashes, but hashes created using [this service](http://www.xorbin.com/tools/sha256-hash-calculator) will work. Don't forget to append your `salt`.
+* Change the `admin_password_hash` field to the bcrypt hash of a password of your choice. Generate the hash using the bundled `minim-genhash` utility by invoking `vendor/bin/minim-genhash <password>` from the project root.
 * Change the `secret_key` field to a randomly-generated string at least 12 characters long.
 * Change the `salt` field to a randomly-generated string at least 12 characters long.
 * The default value of 32 for the `token_length` field should be okay for most applications.
