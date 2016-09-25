@@ -21,6 +21,13 @@ class Authenticator
     private $config;
 
     /**
+     * Holds the cookie token during the current request.
+     *
+     * @var string
+     */
+    private $cookieToken;
+
+    /**
      * Dispenses a randomly generated authentication token.
      *
      * @return string
@@ -71,9 +78,15 @@ class Authenticator
      */
     public function getCookieToken()
     {
+        // If we have accessed the cookie token this request already.
+        if ($this->cookieToken !== null) {
+            return $this->cookieToken;
+        }
+
         $name = $this->config->getCookieName();
         $encrypted = isset($_COOKIE[$name]) ? $_COOKIE[$name] : ''; // Read encrypted cookie.
         $plain = Encryption::decrypt($encrypted, $this->config->getSecretKey());  // Decrypt cookie.
+        $this->cookieToken = $plain; // Don't access cookie again.
 
         return $plain;
     }
@@ -85,6 +98,7 @@ class Authenticator
      */
     public function setCookieToken($token)
     {
+        $this->cookieToken = $token; // Remember this for this request.
         $encrypted = Encryption::encrypt($token, $this->config->getSecretKey()); // Encrypt token.
 
         // Set cookie on client.
