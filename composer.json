@@ -1,9 +1,9 @@
 {
-    "name": "lambdacasserole/minim",
+    "name": "semibreve/minim",
     "type": "library",
     "description": "Minimal single-user auth in PHP.",
     "keywords": ["single","user","auth","authentication"],
-    "homepage": "https://github.com/lambdacasserole/minim",
+    "homepage": "https://github.com/semibreve/minim",
     "license": "MIT",
     "authors": [
         {
