@@ -12,13 +12,13 @@ Minim is designed for this purpose; to be a secure, single-user authentication s
 Install Minim via Composer like this:
 
 ```bash
-composer require lambdacasserole/minim
+composer require semibreve/minim
 ```
 
 Or alternatively, if you're using the PHAR (make sure the `php.exe` executable is in your PATH):
 
 ```
-php composer.phar require lambdacasserole/minim
+php composer.phar require semibreve/minim
 ```
 
 ## Configuration
@@ -59,7 +59,7 @@ These *must* be changed before you go into production, so you need to do the fol
 * Change `cookie_ssl_only` field to `true` if you're operating over HTTPS. If you're not, take a long hard look at your application and ask yourself why you're considering asking for user credentials over an insecure connection when amazing, free tools like [Let's Encrypt](https://letsencrypt.org/) exist.
 * Leave `cookie_http_only` as `true` to make the authentication cookie readable only over HTTP and not by client-side script.
 
-To see an example usage of Minim, [check out my demo repository](https://github.com/lambdacasserole/minim-demo).
+To see an example usage of Minim, [check out the demo repository](https://github.com/semibreve/minim-demo).
 
 ## Usage
 Load your Minim configuration file like this:
@@ -85,4 +85,4 @@ if (!$auth->isAuthenticated()) {
 ```
 
 ## Limitations
-I'm not a security researcher, don't rely on Minim to be secure out of the box and always perform your own penetration testing.
+Don't rely on Minim to be secure out of the box and always perform your own penetration testing.
