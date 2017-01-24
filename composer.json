@@ -17,7 +17,8 @@
         "php": ">=5.3.0",
         "mustangostang/spyc": "^0.5.1",
         "paragonie/random_compat": "^2.0",
-        "ircmaxell/password-compat": "^1.0"
+        "ircmaxell/password-compat": "^1.0",
+        "defuse/php-encryption": "^2.0"
     },
     "bin": ["bin/minim-genhash"],
     "autoload": {

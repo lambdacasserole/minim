@@ -2,6 +2,8 @@
 
 namespace Minim;
 
+use Defuse\Crypto\Crypto;
+
 /**
  * Provides useful encryption functions.
  *
@@ -15,7 +17,7 @@ class Encryption
      * Hashes a password.
      *
      * @param string $password  the password to hash
-     * @return string
+     * @return string           the hashed password
      */
     public static function hash($password)
     {
@@ -25,9 +27,9 @@ class Encryption
     /**
      * Verifies that a password matches a hash.
      *
-     * @param $password the password to verify
-     * @param $hash     the hash to check against
-     * @return bool
+     * @param string $password  the password to verify
+     * @param string $hash      the hash to check against
+     * @return bool             true if the password matches the hash, otherwise false
      */
     public static function verify($password, $hash)
     {
@@ -39,14 +41,11 @@ class Encryption
      *
      * @param string $data      the string to encrypt
      * @param string $password  the password to use to encrypt it
-     * @return string
+     * @return string           the encrypted string in raw binary
      */
     public static function encrypt($data, $password)
     {
-        $iv_size = mcrypt_get_iv_size(MCRYPT_CAST_256, MCRYPT_MODE_CBC);
-        $iv = mcrypt_create_iv($iv_size, MCRYPT_RAND);
-        $encryptedMessage = openssl_encrypt($data, "AES-256-CBC", $password, 0, $iv);
-        return $iv.$encryptedMessage;
+        return Crypto::encryptWithPassword($data, $password, true);
     }
 
     /**
@@ -54,13 +53,10 @@ class Encryption
      *
      * @param string $data      the string to decrypt
      * @param string $password  the password to use to decrypt it
-     * @return string
+     * @return string           the decrypted string
      */
     public static function decrypt($data, $password)
     {
-        $iv_size = mcrypt_get_iv_size(MCRYPT_CAST_256, MCRYPT_MODE_CBC);
-        $iv = substr($data, 0, $iv_size);
-        $decryptedMessage = openssl_decrypt(substr($data, $iv_size), "AES-256-CBC", $password, 0, $iv);
-        return $decryptedMessage;
+        return Crypto::decryptWithPassword($data, $password, true);
     }
 }
