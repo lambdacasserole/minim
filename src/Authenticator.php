@@ -84,8 +84,11 @@ class Authenticator
         }
 
         $name = $this->config->getCookieName();
-        $encrypted = isset($_COOKIE[$name]) ? $_COOKIE[$name] : ''; // Read encrypted cookie.
-        $plain = Encryption::decrypt($encrypted, $this->config->getSecretKey());  // Decrypt cookie.
+        $plain = '';
+        if (isset($_COOKIE[$name])) {
+            $encrypted = $_COOKIE[$name]; // Read encrypted cookie.
+            $plain = Encryption::decrypt($encrypted, $this->config->getSecretKey());  // Decrypt cookie.
+        }
         $this->cookieToken = $plain; // Don't access cookie again.
 
         return $plain;
