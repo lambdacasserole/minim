@@ -108,7 +108,7 @@ class Authenticator
         setcookie($this->config->getCookieName(),
             $encrypted,
             time() + $this->config->getTokenTtl(),
-            '',
+            '/',
             '',
             $this->config->getCookieSslOnly(),
             $this->config->getCookieHttpOnly()); // Store in cookie.
