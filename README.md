@@ -34,7 +34,7 @@ token_length: 32 # The length, in bytes, of any generated authentication tokens.
 token_ttl: 1200 # The time to live for authentication tokens, in seconds.
 cookie_name: minim_auth # The name of the authentication cookie.
 session_file_name: /var/www/minim/token.dat # The name of the session file on-disk.
-cookie_ssl_only: false # Whether or not cookies are enables for HTTPS only. If enabled, non-HTTPS requests will fail.
+cookie_ssl_only: false # Whether or not cookies are enabled for HTTPS only. If enabled, non-HTTPS requests will fail.
 cookie_http_only: true # Whether to restrict cookies to HTTP only and disallow access by client-side script.
 ```
 
